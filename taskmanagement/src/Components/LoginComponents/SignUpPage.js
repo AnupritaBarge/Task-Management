@@ -16,7 +16,7 @@ function SignUpPage()
                 <button
                     onClick={returnHomePg} 
                     class="w-[175px] h-[50px] mt-4 rounded-lg bg-[#ffffff] text-[#2E6B98] ml-3">
-                    LOGO
+                        Home
                 </button>
             </div>
 

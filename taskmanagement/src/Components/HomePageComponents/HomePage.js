@@ -10,8 +10,11 @@ export default function HomePage() {
 
         navigate('/login');
     }
-    
-    return (
+     function GoToFilterPage(){
+
+        navigate('/filters');
+     }
+        return (
         <div class = "flex h-screen w-full flex-col">
             {/* ............................................Navigation Bar.................................................. */}
             <div class = "flex h-[10%] flex-row  bg-slate-100">
@@ -21,7 +24,13 @@ export default function HomePage() {
                     Return to Login
                 </button>
 
+                <button 
+                    onClick={GoToFilterPage}
+                    class="w-[175px] h-[50px] mt-4 rounded-lg bg-[#2E6B98] text-white  ml-[20%]">
+                    filters
+                </button>
             </div>
+
             <div class = "flex flex-row flex-1 overflow-auto">
 
             {/* ............................................'Planned' Block.................................................  */}

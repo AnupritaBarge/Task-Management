@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Tasks from './Tasks';
+import Logo from './TMLogo.png'
 
 
 export default function HomePage() {
@@ -18,11 +19,10 @@ export default function HomePage() {
         <div class = "flex h-screen w-full flex-col">
             {/* ............................................Navigation Bar.................................................. */}
             <div class = "flex h-[10%] flex-row  bg-slate-100">
-                <button
+                <img
+                    src={Logo}
                     onClick={returnHP}
-                    class="w-[175px] h-[50px] mt-4 rounded-lg bg-[#2E6B98] text-white  ml-3">
-                    Return to Login
-                </button>
+                    class="w-[70px] h-[65px] mt-2 ml-6"/>               
 
                 <button 
                     onClick={GoToFilterPage}
@@ -56,7 +56,7 @@ export default function HomePage() {
 
                 <div class = "flex flex-col w-[19%] min-h-full bg-white m-3 flex-grow">
                     <div class = "flex flex-col h-[7%] text-center bg-[#d7e9f5] py-2">
-                        <p class = "text-center ">Planned</p>                                                
+                        <p class = "text-center ">Approved</p>                                                
                     </div>
                     <div class = "flex flex-col flex-1 ">
                         <Tasks/>

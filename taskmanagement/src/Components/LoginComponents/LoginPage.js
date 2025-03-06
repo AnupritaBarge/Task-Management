@@ -1,12 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import LoginImage from './LoginImage.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function LoginPage() {
-    const uname = 'abc';
-    const pass = '123';
-    const [username, setusername] = useState('');
-    const [password, setpassword] = useState('');
+    
+    const [enteredusername, setusername] = useState('');
+    const [enteredpassword, setpassword] = useState('');
+    const [APIusers, setusers] = useState([]);         //stores user data from API
+
+    // username = 'abc';
+    // setusername('abc');
 
     const navigate = useNavigate();
 
@@ -14,29 +17,45 @@ export default function LoginPage() {
     //     navigate('/home');
     // };
 
-    function Login() {    
-        console.log(username);
-        console.log(password);
+    useEffect(() => {
+        const fetchUsers = async() => {
 
-        if(username === uname && password === pass)
+            const response = await fetch('http://localhost:4000/users');        //fetches data from API
+            const data = await response.json();             //converts the received data into JSON
+            console.log(data);
+            setusers(data);         //populated the data in users
+        }
+        fetchUsers();        
+    },[]);
+
+    //console.log(users);
+
+    function Login() {    
+        console.log(enteredusername);
+        console.log(enteredpassword);
+        console.log(APIusers);
+
+        const userexists = APIusers.find(APIuser => APIuser.username === enteredusername);
+        console.log(userexists);
+        if(enteredusername === userexists.username && enteredpassword === userexists.password)
         {
             navigate('/home');
         // alert("Login Successful");
         }
         else
         {
-        alert("Invalid username or password");
+            alert("Invalid username or password");
         }
     }
 
     const handleUnameChange = (event) => {
         setusername(event.target.value);
-        console.log(username);
+        console.log(enteredusername);
     };
 
     const handlePassChange = (event) => {
         setpassword(event.target.value);
-        console.log(password);
+        console.log(enteredpassword);
     }
     return(
         <div class="flex h-screen w-screen flex-col">
@@ -55,12 +74,12 @@ export default function LoginPage() {
                     <h1 class=" text-[30px] font-semibold text-[#2E6B98]">Login</h1>
 
                     <input 
-                        value={username}
+                        value={enteredusername}
                         onChange={handleUnameChange}
                         class="w-[350px] h-[50px] mt-14 rounded-lg border-solid border-[1px] border-gray-400 pl-5" placeholder='Username'/>
 
                     <input 
-                        value={password}
+                        value={enteredpassword}
                         onChange={handlePassChange}
                         type='password'
                         class="w-[350px] h-[50px] mt-10 rounded-lg border-solid border-[1px] border-gray-400 pl-5" placeholder='Password'/>

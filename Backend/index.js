@@ -1,10 +1,14 @@
+// node index.js
+
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());                //to allow request from same machine
 
 mongoose.connect('',{})
     .then(() => {
@@ -32,7 +36,7 @@ const User = mongoose.model('user', UserSchema ); // model name User
 
 app.post('/users', async(req, res) => {
     const {username, password} = req.body;
-    console.log('/user called');
+    console.log('Post Called');
     try{
         const user = new User({username, password}); //insert into user
         await user.save();
@@ -44,7 +48,7 @@ app.post('/users', async(req, res) => {
 });
 
 app.get('/users', async(req, res) => {
-    console.log('/user called');
+    console.log('Get called');
     try{
         const users = await User.find(); //select * from user
         res.status(200).json(users);
